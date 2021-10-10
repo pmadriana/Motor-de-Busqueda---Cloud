@@ -35,9 +35,8 @@ def main():
             neighbourds = graph[node]
 
             for neighbourd in neighbourds:
-                if neighbourd in pagerank_list.keys():
-                    if len(graph[node])>0:
-                        pagerank_list[neighbourd]['new_pagerank'] += (pagerank_list[node]['curr_pagerank']/(len(graph[node])))
+                if neighbourd in pagerank_list.keys() and node in graph.keys() and len(graph[node])>0:
+                    pagerank_list[neighbourd]['new_pagerank'] += (pagerank_list[node]['curr_pagerank']/(len(graph[node])))
                 else:
                     pagerank_list[neighbourd] = {'curr_pagerank': random.uniform(0,1), 'new_pagerank': 0.0}
             
