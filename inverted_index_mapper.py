@@ -17,7 +17,7 @@ def process_data(input):
     for line in input:
         try:
             article = json.loads(line)
-            if 'abstract' in article.keys() and 'references' in article.keys():
+            if 'abstract' in article.keys() and 'references' in article.keys() and article['title'].isascii():
                 title = article['title']
                 title = re.sub(r'[^\w\s]', '',title).lower()
                 title = title.split()

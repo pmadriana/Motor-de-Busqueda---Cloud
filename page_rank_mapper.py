@@ -12,7 +12,7 @@ def process_data(input, graph):
     for line in input:
         try:
             article = json.loads(line)
-            if 'abstract' in article.keys() and 'references' in article.keys():
+            if 'abstract' in article.keys() and 'references' in article.keys() and article['title'].isascii():
                 curr_pagerank_value = random.uniform(0,1)
                 yield (article['id'], curr_pagerank_value)
                 references_articles = list(article['references'])
