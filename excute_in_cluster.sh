@@ -1,0 +1,2 @@
+mapred streaming -files inverted_index_mapper.py,inverted_index_reducer.py -input /data/*.json -output /inverted_index_result -mapper inverted_index_mapper.py -reducer inverted_index_reducer.py
+mapred streaming -files page_rank_mapper.py,page_rank_reducer.py -input /data/*.json -output /page_rank_result -mapper page_rank_mapper.py -reducer page_rank_reducer.py
