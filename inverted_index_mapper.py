@@ -15,19 +15,22 @@ def contains_number(value):
 
 def process_data(input):
     for line in input:
-        article = json.loads(line)
-        if 'abstract' in article.keys() and 'references' in article.keys():
-            title = article['title']
-            title = re.sub(r'[^\w\s]', '',title).lower()
-            title = title.split()
-            title_set = set(title)
-            title_list = list(title_set)
-            title_stopwords_clean = []
-            for word in title_list:
-                if word not in stop_words and not contains_number(word):
-                    title_stopwords_clean.append(word)
-            
-            yield (article['id'],title_stopwords_clean)
+        try:
+            article = json.loads(line)
+            if 'abstract' in article.keys() and 'references' in article.keys():
+                title = article['title']
+                title = re.sub(r'[^\w\s]', '',title).lower()
+                title = title.split()
+                title_set = set(title)
+                title_list = list(title_set)
+                title_stopwords_clean = []
+                for word in title_list:
+                    if word not in stop_words and not contains_number(word):
+                        title_stopwords_clean.append(word)
+                
+                yield (article['id'],title_stopwords_clean)
+        except:
+            pass
 
 def main():
     separator = '\t'

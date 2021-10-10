@@ -10,13 +10,16 @@ graph = {}
 def process_data(input, graph):
     
     for line in input:
-        article = json.loads(line)
-        if 'abstract' in article.keys() and 'references' in article.keys():
-            curr_pagerank_value = random.uniform(0,1)
-            yield (article['id'], curr_pagerank_value)
-            references_articles = list(article['references'])
-            
-            graph[article['id']] = references_articles
+        try:
+            article = json.loads(line)
+            if 'abstract' in article.keys() and 'references' in article.keys():
+                curr_pagerank_value = random.uniform(0,1)
+                yield (article['id'], curr_pagerank_value)
+                references_articles = list(article['references'])
+                
+                graph[article['id']] = references_articles
+        except:
+            pass
 
 
 def main():
