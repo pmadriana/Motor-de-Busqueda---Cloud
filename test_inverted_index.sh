@@ -1,0 +1,1 @@
+cat data/dblp-ref-3.json | ./inverted_index_mapper.py | sort | ./inverted_index_reducer.py > output_i.txt
