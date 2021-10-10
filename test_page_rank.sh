@@ -1,0 +1,1 @@
+cat data/dblp-ref-3.json | ./page_rank_mapper.py | sort | ./page_rank_reducer.py > output_p.txt
