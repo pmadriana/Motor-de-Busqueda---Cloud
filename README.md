@@ -28,3 +28,7 @@ mapred streaming -files page_rank_mapper.py,page_rank_reducer.py -input /data/*.
 ```
 hadoop fs -getmerge /inverted_index_result index_result.txt && hadoop fs -getmerge /page_rank_result ank_result.txt
 ```
+
+<br>
+<img src="https://github.com/pmadriana/Motor-de-Busqueda---Cloud/blob/main/searchmotor.PNG" />
+<br>
