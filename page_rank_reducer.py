@@ -24,9 +24,7 @@ def read_mapper(data, separator):
 
 def main():
     separator = '\t'
-    max_iterations = 10
-    d = 0.85
-    d_complement = 1 - d
+    max_iterations = 100
     
     
     for _ in range(max_iterations):
@@ -35,7 +33,7 @@ def main():
             neighbourds = graph[node]
             for neighbourd in neighbourds:
                 try:
-                    pagerank_list[neighbourd]['curr_pagerank'] += pagerank_list[node]['new_pagerank']
+                    pagerank_list[neighbourd]['curr_pagerank'] += pagerank_list[node]['new_pagerank']    
                 except:
                     pass
             
@@ -45,7 +43,7 @@ def main():
             except:
                 w = pagerank_list[paper_id]['curr_pagerank']
                 
-            print '%s%s%f' % (paper_id, separator, w)
+            print (paper_id+separator+str(w))
             
 
 if __name__ == '__main__':
