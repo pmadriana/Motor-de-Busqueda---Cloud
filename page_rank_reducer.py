@@ -25,39 +25,26 @@ def read_mapper(data, separator):
 def main():
     separator = '\t'
     max_iterations = 100
-    d = 0.85
-    d_complement = 1 - d
     
-    graph, pagerank_list = read_mapper(stdin,separator)
+    
     for _ in range(max_iterations):
-        
+        graph, pagerank_list = read_mapper(stdin,separator)
         for node in graph:
             neighbourds = graph[node]
-
             for neighbourd in neighbourds:
-                if neighbourd in pagerank_list.keys() and len(graph[node])>0:
-                    if node not in pagerank_list.keys():
-                        pagerank_list[node] = {'curr_pagerank': random.uniform(0,1), 'new_pagerank': 0.0}
-                        
-                    pagerank_list[neighbourd]['new_pagerank'] += (pagerank_list[node]['curr_pagerank']/(len(graph[node])))
-                else:
-                    pagerank_list[neighbourd] = {'curr_pagerank': random.uniform(0,1), 'new_pagerank': 0.0}
+                try:
+                    pagerank_list[neighbourd]['curr_pagerank'] += pagerank_list[node]['new_pagerank']    
+                except:
+                    pass
             
-        
         for paper_id in pagerank_list:
-            if paper_id in graph.keys():
-                pagerank_list[paper_id]['new_pagerank'] = d_complement + d*pagerank_list[paper_id]['new_pagerank']
-            else:
-                pagerank_list[paper_id] = {'curr_pagerank': random.uniform(0,1), 'new_pagerank': 0.0}
-    
-        for paper_id in pagerank_list:
-            if pagerank_list[paper_id]['new_pagerank'] != 0.0:
-                pagerank_list[paper_id]['curr_pagerank'] = pagerank_list[paper_id]['new_pagerank']
+            try:
+                w = pagerank_list[paper_id]['curr_pagerank'] / float(len(graph[paper_id]))
+            except:
+                w = pagerank_list[paper_id]['curr_pagerank']
+                
+            print (paper_id+separator+str(w))
             
-    
-    for paper_id in pagerank_list:
-        rank = math.floor(pagerank_list[paper_id]['curr_pagerank'] * 1000)/1000.0
-        print(paper_id+separator+str(rank)) 
 
 if __name__ == '__main__':
     main()
